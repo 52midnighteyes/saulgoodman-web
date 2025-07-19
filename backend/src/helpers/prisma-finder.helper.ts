@@ -1,3 +1,4 @@
+import { equal } from "assert";
 import prisma from "../lib/prisma";
 
 export async function findUserById(id: string) {
@@ -36,6 +37,35 @@ export async function findUserByUsername(username: string) {
       where: {
         email: {
           equals: username,
+          mode: "insensitive",
+        },
+      },
+    });
+    return response;
+  } catch (err) {
+    throw err;
+  }
+}
+
+export async function findBlogById(id: string) {
+  try {
+    const response = await prisma.blogs.findUnique({
+      where: {
+        id,
+      },
+    });
+    return response;
+  } catch (err) {
+    throw err;
+  }
+}
+
+export async function findBlogBySlug(slug: string) {
+  try {
+    const response = await prisma.blogs.findFirst({
+      where: {
+        slug: {
+          equals: slug,
           mode: "insensitive",
         },
       },

@@ -14,21 +14,7 @@ enum Role {
   user
 }
 
-model users {
-  id          String   @id @default(uuid())
-  username    String   @unique
-  email       String   @unique
-  password    String
-  role        Role     @default(user)
-  created_at  DateTime @default(now())
-  deleted_at  DateTime?
-
-  blogs       blogs[]  @relation("UserBlogs")
-
-  @@map("users")
-}
-
-model blogs {
+model Blog {
   id             String   @id @default(uuid())
   title          String
   slug           String   @unique
@@ -38,7 +24,30 @@ model blogs {
   published_date DateTime @default(now())
 
   author         String
-  user           users    @relation("UserBlogs", fields: [author], references: [id], onDelete: Cascade)
+  user           User     @relation("UserBlogs", fields: [author], references: [id], onDelete: Cascade)
 
   @@map("blogs")
+}
+
+model User {
+  id          String   @id @default(uuid())
+  username    String   @unique
+  email       String   @unique
+  password    String
+  role        Role     @default(user)
+  created_at  DateTime @default(now())
+  deleted_at  DateTime?
+
+  blogs       Blog[]   @relation("UserBlogs")
+
+  @@map("users")
+}
+
+model EmailSubmission {
+  id String @id @default(uuid())
+  firstname String
+  lastname String?
+  email String @unique
+  content String
+  date DateTime @default(now())
 }
