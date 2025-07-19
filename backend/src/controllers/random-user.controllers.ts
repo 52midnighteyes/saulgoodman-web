@@ -7,7 +7,7 @@ export async function getRandomPeopleController(
   next: NextFunction
 ) {
   try {
-    const number = Number(req.params);
+    const number = Number(req.query.number);
     const response = await getRandomPeopleRepo(number);
 
     res.status(201).json({
