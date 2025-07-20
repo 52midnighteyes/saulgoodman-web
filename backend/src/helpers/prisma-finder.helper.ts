@@ -34,7 +34,7 @@ export async function findUserByUsername(username: string) {
   try {
     const response = await prisma.user.findFirst({
       where: {
-        email: {
+        username: {
           equals: username,
           mode: "insensitive",
         },

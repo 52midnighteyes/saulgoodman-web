@@ -50,4 +50,6 @@ model EmailSubmission {
   email String @unique
   content String
   date DateTime @default(now())
+
+  @@map("EmailSubmissions")
 }

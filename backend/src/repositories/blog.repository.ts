@@ -32,9 +32,9 @@ export async function getAllBlogRepo() {
   }
 }
 
-export async function getBlogDataBySlugRepo(id: string) {
+export async function getBlogDataBySlugRepo(slug: string) {
   try {
-    const response = await findBlogById(id);
+    const response = await findBlogBySlug(slug);
     if (!response) throw new Error("data not found");
 
     return response;

@@ -7,11 +7,13 @@ export async function getRandomPeopleController(
   next: NextFunction
 ) {
   try {
-    const number = Number(req.query.number);
-    const response = await getRandomPeopleRepo(number);
+    const number = req.query.results;
+    const response = await getRandomPeopleRepo(Number(number));
+
+    console.log(number);
 
     res.status(201).json({
-      message: `success retriving ${number} random people`,
+      message: `success retrieving ${number} random people`,
       data: response,
     });
   } catch (err) {

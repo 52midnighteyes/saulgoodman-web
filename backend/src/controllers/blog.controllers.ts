@@ -60,8 +60,7 @@ export async function getBlogDataBySlugController(
   next: NextFunction
 ) {
   try {
-    const slug: string = req.params.slug;
-
+    const slug = req.params.slug;
     const response = await getBlogDataBySlugRepo(slug);
 
     res.status(201).json({
